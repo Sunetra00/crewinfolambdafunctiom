@@ -11,7 +11,7 @@ phases:
       - echo "Zipping deployment package..."
       - mkdir lib
       - cd lib
-      - zip -r9 ../deployment_package.zip .
+      - zip -r ../deployment_package.zip .
       - cd ..
       - zip -g deployment_package.zip handler.py
   post_build:
