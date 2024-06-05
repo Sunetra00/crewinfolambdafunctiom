@@ -9,6 +9,7 @@ phases:
   build:
     commands:
       - echo "Zipping deployment package..."
+      - mkdir lib
       - cd lib
       - zip -r9 ../deployment_package.zip .
       - cd ..
