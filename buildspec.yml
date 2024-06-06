@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - echo "Zipping deployment package..."
-      - zip -g deployment_package.zip handler.py
+      - zip -g deployment_package.zip lambda_function.py
   post_build:
     commands:
       - echo "Updating lambda Function..."
