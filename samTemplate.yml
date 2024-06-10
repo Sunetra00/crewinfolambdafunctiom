@@ -49,7 +49,7 @@ Resources:
       Description: !Sub
         - Stack ${AWS::StackName} Function ${ResourceName}
         - ResourceName: crewinfolamba
-      CodeUri: crewinfolambafunctiom
+      CodeUri: .
       Handler: handler.lambda_function
       Runtime: python3.12
       MemorySize: 1024
