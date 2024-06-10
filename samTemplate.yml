@@ -14,10 +14,12 @@ Resources:
           /crews:
             get:
               x-amazon-apigateway-integration:
-                httpMethod: GET
+                httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
               responses: {}
+              
+
           /crew:
             post:
               x-amazon-apigateway-integration:
@@ -27,21 +29,21 @@ Resources:
               responses: {}
             get:
               x-amazon-apigateway-integration:
-                httpMethod: GET
+                httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
               responses: {}
 
             delete:
               x-amazon-apigateway-integration:
-                httpMethod: DELETE
+                httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
               responses: {}
             
             patch:
               x-amazon-apigateway-integration:
-                httpMethod: PATCH
+                httpMethod: POST
                 type: aws_proxy
                 uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
               responses: {}
