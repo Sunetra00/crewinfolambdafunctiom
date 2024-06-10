@@ -92,13 +92,13 @@ Resources:
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref crews
-  crews:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: crewid
-          AttributeType: S
-      BillingMode: PAY_PER_REQUEST
-      KeySchema:
-        - AttributeName: crewid
-          KeyType: HASH
+  # crews:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     AttributeDefinitions:
+  #       - AttributeName: crewid
+  #         AttributeType: S
+  #     BillingMode: PAY_PER_REQUEST
+  #     KeySchema:
+  #       - AttributeName: crewid
+  #         KeyType: HASH
