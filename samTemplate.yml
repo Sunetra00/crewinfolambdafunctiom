@@ -102,6 +102,7 @@ Resources:
   crews:
     Type: AWS::DynamoDB::Table
     Properties:
+      TableName: crewInformation
       AttributeDefinitions:
         - AttributeName: crewid
           AttributeType: S

@@ -8,7 +8,7 @@ import time
 
 # Initialize the DynamoDB client
 dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
-dynamodb_table = dynamodb.Table('crew_info')
+dynamodb_table = dynamodb.Table('crewInformation')
 
 status_check_path = '/status'
 crew_path = '/crew'
