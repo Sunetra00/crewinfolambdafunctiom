@@ -1,12 +1,10 @@
-version: 0.2
-
+version: 0.1
 phases:
-  build:
+  install:
     commands:
-      - echo "Zipping deployment package..."
-      - zip -g deployment_package.zip lambda_function.py
-  post_build:
-    commands:
-      - echo "Updating lambda Function..."
-      - aws lambda update-function-code --function-name crewinfolambda --zip-file fileb://deployment_package.zip
-      - echo "DONE!!"
+      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket pipeline-bucket --output-template-file outputSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - samTemplate.yaml
+    - outputSamTemplate.yaml

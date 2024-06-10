@@ -1,0 +1,104 @@
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub
+        - ${ResourceName} From Stack ${AWS::StackName}
+        - ResourceName: Api
+      StageName: Prod
+      DefinitionBody:
+        openapi: '3.0'
+        info: {}
+        paths:
+          /crews:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
+              responses: {}
+          /crew:
+            post:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
+              responses: {}
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
+              responses: {}
+
+            delete:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${crewinfolamba.Arn}/invocations
+              responses: {}
+      EndpointConfiguration: REGIONAL
+      TracingEnabled: true
+      Cors:
+        MaxAge: 5
+  crewinfolamba:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-crewinfolamba
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: crewinfolamba
+      CodeUri: .
+      Handler: handler.lambda_function
+      Runtime: python3.12
+      MemorySize: 1024
+      Timeout: 30
+      Tracing: Active
+      Events:
+        ApiPOSTcrews:
+          Type: Api
+          Properties:
+            Path: /crew
+            Method: POST
+            RestApiId: !Ref Api
+        ApiPATCHitemsid:
+          Type: Api
+          Properties:
+            Path: /crew
+            Method: PATCH
+            RestApiId: !Ref Api
+        ApiGETcrews:
+          Type: Api
+          Properties:
+            Path: /crew
+            Method: GET
+            RestApiId: !Ref Api
+        ApiGETcrew:
+          Type: Api
+          Properties:
+            Path: /crews
+            Method: GET
+            RestApiId: !Ref Api
+        ApiDELETEcrew:
+          Type: Api
+          Properties:
+            Path: /crew
+            Method: DELETE
+            RestApiId: !Ref Api
+      Environment:
+        Variables:
+          CREWS_TABLE_NAME: !Ref crews
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref crews
+  crews:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: crewid
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+        - AttributeName: crewid
+          KeyType: HASH
