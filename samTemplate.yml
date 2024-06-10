@@ -50,19 +50,19 @@ Resources:
         - Stack ${AWS::StackName} Function ${ResourceName}
         - ResourceName: crewinfolamba
       CodeUri: ./Lambdacode 
-      Handler: lambda_function.lambhda_handler
+      Handler: lambda_function.lambda_handler
       Runtime: python3.12
       MemorySize: 1024
       Timeout: 30
       Tracing: Active
       Events:
-        ApiPOSTcrews:
+        ApiPOSTcrew:
           Type: Api
           Properties:
             Path: /crew
             Method: POST
             RestApiId: !Ref Api
-        ApiPATCHitemsid:
+        ApiPATCHcrew:
           Type: Api
           Properties:
             Path: /crew
