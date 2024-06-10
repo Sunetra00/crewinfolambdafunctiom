@@ -4,7 +4,7 @@ phases:
     commands:
       - pwd
       - ls -lrt
-      - aws cloudformation package --template-file samTemplate.yml --s3-bucket codepipeline-ap-south-1-597145927771 --output-template-file outputSamTemplate.yml
+      - aws cloudformation package --template-file samTemplate.yml --s3-bucket parth-pipeline-bucket --output-template-file outputSamTemplate.yml
 artifacts:
   type: zip
   files:

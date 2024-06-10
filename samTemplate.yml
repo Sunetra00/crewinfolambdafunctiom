@@ -49,8 +49,8 @@ Resources:
       Description: !Sub
         - Stack ${AWS::StackName} Function ${ResourceName}
         - ResourceName: crewinfolamba
-      # CodeUri: .src/ 
-      Handler: handler.lambda_function
+      CodeUri: ./Lambdacode 
+      Handler: lambda_function.lambhda_handler
       Runtime: python3.12
       MemorySize: 1024
       Timeout: 30
