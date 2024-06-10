@@ -49,6 +49,22 @@ Resources:
       TracingEnabled: true
       Cors:
         MaxAge: 5
+  
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+      RoleName: LambdaExecutionRole
+  
   crewinfolamba:
     Type: AWS::Serverless::Function
     Properties:
@@ -61,6 +77,7 @@ Resources:
       Runtime: python3.12
       MemorySize: 1024
       Timeout: 30
+      Role: !GetAtt LambdaRole.Arn
       Tracing: Active
       Events:
         ApiPOSTcrew:
